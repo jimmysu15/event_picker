@@ -1,0 +1,481 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>給我一個優惠方案</title>
+        <meta name="description" content="電商優惠方案或銷售活動懶人產生器。[警告]行銷不是只有辦優惠活動，使用前請詳閱品牌或行銷專家">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>   
+        <link rel="stylesheet" href="css/bootstrap-material-design.css">
+  		<link rel="stylesheet" href="css/ripples.min.css">        
+  		<style>
+  			body{
+				background: url('images/the-adoption-of-1515293_1920.jpg') no-repeat top center;
+				font-size: 15px;
+				font-family: microsoft jhenghei, sans-serif
+			}
+			body::after{content:'';background: rgba(255,255,255,.8);position: absolute;width:100%;height:100vh;top:0;left:0;display: block;z-index: 0}
+			.btn.btn-sm, .input-group-btn .btn.btn-sm, .btn-group-sm .btn, .btn-group-sm .input-group-btn .btn{padding: 5px 10px;}
+			.form-group{margin-top: 0}
+			.input-group-addon {font-size: 15px;}
+
+			.navbar.main_nav_wrap{margin-bottom: 5px;position: relative;z-index: 1;background: none;color:#FF5722;font-weight: bold}
+			.navbar>.container .navbar-brand{font-size: 30px;height: auto;line-height: 100%;padding-top: 25px}
+			.navbar .navbar-nav > li > .togglebutton{padding-top:25px;padding-bottom: 20px;font-size: 20px;}
+			.navbar .togglebutton label{color:#FF5722;}
+			.navbar .toggle{margin-left: 15px}
+			/* .togglebutton label input[type=checkbox]:checked + .toggle{background: rgba(255, 226, 20, 0.5)} */
+
+
+			.page_wrapper{background: rgba(255,255,255,.9);padding-top: 20px;border-radius: 5px;position: relative;z-index: 1}
+			.filter_wrap{margin-bottom: 20px;border-bottom: 1px dotted #555;padding-bottom: 20px}
+			.filter_wrap:last-child{border-bottom: 0}
+			.func_title{margin:5px 0 0;font-size: 16px}
+
+			.recentevent{padding:0;margin:0;list-style: none}
+			.recentevent>li{display: none;border:1px solid #ccc;background: #fff;border-radius: 5px;margin:0 10px 10px 0;padding:2px 5px;float: left;font-size: 34px;}
+			.ta_type, .event_list{list-style: none;padding:0;margin:0;letter-spacing: 1px}
+			.ta_type{height:48px;overflow: hidden}
+			.ta_type>li, .event_list>li{display: none;font-size: 34px;color:#000;}
+  			.ta_type>li{float: left;margin-right: 10px}
+  			.event_list>li{position: absolute;}
+  			.event_list>.show{position: relative}
+  			.event_list>li>.example{font-size:16px;color:#000;margin-top: 5px}
+
+  			.btn_re_event>.glyphicon, .btn_re_ta>.glyphicon{margin-right: 10px}
+
+  		</style>
+        
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <nav class="navbar navbar-inverse main_nav_wrap">
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">給我一個優惠方案</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse">
+		      <ul class="nav navbar-nav">
+		      			       
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		      	<!-- <li><a href="#" data-toggle="modal" data-target="#about_modal"><span class="glyphicon glyphicon-glass"></span> 簡介與感謝名單</a></li> -->
+		      	<li>
+		      		<div class="togglebutton">
+		              <label>
+		                動畫效果
+		                <input type="checkbox" class="animated">
+		              </label>
+		            </div>
+		      	</li>
+		      </ul>		 		      
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+			
+    	<!-- <div class="container">
+	    	<div class="row">
+	    		<div class="col-sm-4">
+	    			<div class="form-group">
+		    			<label class="control-label" for="pd_price">商品單價原價</label>
+		    			<input type="text" class="form-control" id="pd_price">
+		    		</div>
+	    		</div>
+	    		<div class="col-sm-4">
+	    			<div class="form-group">
+		    			<label class="control-label" for="freight_fee">運費</label>
+		    			<input type="text" class="form-control" id="freight_fee">
+		    		</div>
+	    		</div>
+	    		<div class="col-sm-4">
+	    			<div class="form-group">
+		    			<label class="control-label" for="member_level">有會員等級</label>
+		    			<input type="checkbox" id="member_level">
+		    		</div>	
+	    		</div>
+	    	</div>    		
+    	</div>  -->
+    	<div class="container page_wrapper">
+    		    	
+	    	<div class=" filter_wrap filter_date">
+	    		<div class="row">
+	    			<div class="col-sm-1">
+	    					<h2 class="func_title">近期節慶</h2>
+	    			</div>
+	    			<div class="col-sm-11">
+			    			<ul class="recentevent">
+			    				<li class="dec jan feb">新年優惠</li>
+			    				<li class="jan">農曆年預購</li>
+			    				<li class="feb">開工優惠</li>
+			    				<li class="jan">春節</li>
+			    				<li class="feb">元宵</li>
+			    				<li class="jan">學生寒假</li>
+			    				<li class="feb">西洋情人節</li>
+			    				<li class="jan feb mar apr">櫻花季</li>
+			    				<li class="feb">客家日</li>
+			    				<li class="feb mar apr">野餐</li>
+			    				<li class="mar">婦女節</li>
+			    				<li class="mar">白色情人節</li>
+			    				<li class="mar">植樹節</li>
+			    				<li class="apr">愚人節</li>
+			    				<li class="apr">兒童節</li>
+			    				<li class="apr">清明節</li>
+			    				<li class="may">勞動節</li>
+			    				<li class="may">母親節</li>
+			    				<li class="jun">端午節</li>
+			    				<li class="jun">畢業季</li>
+			    				<li class="jul">暑假優惠</li>
+			    				<li class="jul">防颱</li>
+			    				<li class="aug">七夕情人節</li>
+			    				<li class="aug">父親節</li>
+			    				<li class="sep">中秋節</li>
+			    				<li class="sep">教師節</li>
+			    				<li class="sep">軍人節</li>
+			    				<li class="sep">開學</li>
+			    				<li class="oct">國慶日</li>
+			    				<li class="oct">萬聖節</li>
+			    				<li class="nov">感恩節</li>
+			    				<li class="dec">聖誕節</li>
+			    				<li class="dec jan feb">寒流</li>
+			    				<li class="mar apr">白羊座</li>
+			    				<li class="apr may">金牛座</li>
+			    				<li class="may jun">雙子座</li>
+			    				<li class="jun jul">巨蟹座</li>
+			    				<li class="jul aug">獅子座</li>
+			    				<li class="aug sep">處女座</li>
+			    				<li class="sep oct">天秤座</li>
+			    				<li class="oct nov">天蠍座</li>
+			    				<li class="nov dec">射手座</li>
+			    				<li class="dec jan">魔羯座</li>
+			    				<li class="jan feb">水瓶座</li>
+			    				<li class="feb mar">雙魚座</li>
+			    			</ul>
+					</div>
+	    		</div>        		
+			</div>  
+
+			<div class="filter_wrap filter_ta">
+	    		<div class="row">
+	    			<div class="col-sm-1">
+	    				<h2 class="func_title">對象</h2>
+	    				<a class="btn btn-warning btn-raised btn-sm btn_re_ta" onclick="ta_refresh()"><span class="glyphicon glyphicon-refresh"></span>換一個</a>
+	    			</div>
+	    			<div class="col-sm-11">
+			    			<ul class="ta_type">
+			    				<li></li>
+			    				<li>喜歡自己下廚的人</li>
+			    				<li>單親媽媽</li>
+			    				<li>碩博士</li>
+			    				<li>單身者</li>
+			    				<li>失戀者</li>
+			    				<li>文青</li>
+			    				<li>司機/運將</li>
+			    				<li>愛吃海鮮的人</li>
+			    				<li>長頭髮的人</li>
+			    				<li>敏感肌膚的人</li>
+			    				<li>放寒暑假的學生</li>
+			    				<li>上班族</li>
+			    				<li>品酒者</li>
+			    				<li>喜歡電競</li>
+			    				<li>喜歡動漫</li>
+			    				<li>日本文化愛好者</li>
+			    				<li>素食者</li>
+			    				<li>青春期小孩</li>
+			    				<li>小Baby</li>
+			    				<li>學齡前小孩</li>
+			    				<li>喜歡撿便宜</li>
+			    				<li>約聘</li>
+			    				<li>打工人員</li>
+			    				<li>孕婦</li>
+			    				<li>新手父母</li>
+			    				<li>上夜班的人</li>
+			    				<li>客戶</li>
+			    				<li>老闆/主管</li>
+			    				<li>同事</li>
+			    				<li>老師</li>
+			    				<li>左撇子</li>
+			    				<li>多年不見的朋友</li>
+			    				<li>同學</li>
+			    				<li>宗教信徒</li>
+			    				<li>好姊妹</li>
+			    				<li>雙親</li>
+			    				<li>媽媽</li>
+			    				<li>華僑</li>
+			    				<li>外國人</li>
+			    				<li>養寵物的人</li>
+			    				<li>喜歡嘗鮮</li>
+			    				<li>喜歡旅遊</li>
+			    				<li>愛吃的人</li>
+			    				<li>父女</li>
+			    				<li>祖孫</li>
+			    				<li>兄弟</li>
+			    				<li>同性</li>
+			    				<li>老會員</li>
+			    				<li>新會員</li>
+			    				<li>近期未購物的會員</li>
+			    				<li>本年度已消費多次的會員</li>
+			    				<li>壽星優惠</li>
+			    			</ul>
+					</div>
+	    		</div>        		
+			</div>
+
+	        <div class="filter_wrap filter_event">
+		        <div class="row">
+		        	<div class="col-sm-1">
+	    				<h2 class="func_title">優惠活動</h2>
+	    				<a class="btn btn-warning btn-raised btn-sm btn_re_event" onclick="event_refresh()"><span class="glyphicon glyphicon-refresh"></span>換一個</a>
+	    			</div>     	
+		        	<div class="col-sm-8">
+		        		<ol class="event_list">
+		        			<li></li>
+		        			<li>加量優惠
+		        				<p class="example">買大送小</p>
+		        				<p class="example">買小盒自動升級大盒<br>買小盒加價升級大盒</p>
+		        			</li>
+		        			<li>買商品送試吃/試用</li>
+		        			<li>同商品外加搭贈
+		        				<p class="example">買 3 件同商品再送 1 件同商品，共 4 件</p>
+		        			</li>
+		        			<li>同商品內含搭贈
+		        				<p class="example">選 3 件，其中 1 個免費，共 3 件</p>
+		        			</li>
+		        			<li>不同商品任選內含搭贈
+		        				<p class="example">任選 2 件，便宜的那件免費，共 2 件</p>
+		        			</li>
+		        			<li>不同商品任選外加搭贈，只送一次
+		        				<p class="example">任選 2 件，額外再送指定商品 1 件，共 3 件，買再多還是只送 1 件</p>
+		        			</li>
+		        			<li>不同商品任選外加搭贈，階層數量
+		        				<p class="example">任選 2 件，額外再送指定商品 1 件，買越多送越多</p>
+		        			</li>
+		        			<li>憑購物單號抽獎
+		        				<p class="example">會員身份訂購，<span class="demodate_tomorrow"></span>~<span class="demodate_next_month_end"></span>完成訂購並到貨，可獲得抽獎機會。<br>每週抽一名，獎品為...。</p>
+		        			</li>
+		        			<li>購物車結帳加價購(交叉銷售)
+		        				<p class="example">滿額時以較便宜的價格加購商品</p>
+		        			</li>
+		        			<li>商品頁加價購(相關商品/提升銷售)
+		        				<p class="example">購買此商品，再一起買配件/周邊可享優惠價</p>
+		        			</li>
+		        			<li>會員紅利點數限時加倍送
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>會員狂歡節
+		        				<p class="example">會員限定優惠，商品低至 99 元/盒</p>
+		        			</li>
+		        			<li>會員紅利點數限時加倍抵用
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>購物得折價券，下次用
+		        				<p class="example">購物滿 999 就能獲得折價券 100 元呦~<br>
+		        				(折價卷 50 元兩張，隨包裹附上<br>
+		        				折價卷數量有限，按照訂購順序發放<br>
+		        				下次消費時
+		        				</p>
+		        			</li>
+		        			<li>店家合作送折價券
+		        				<p class="example">在 A 店家購物滿 999 就能獲得 B 店家的折價券 100 元呦~<br>
+		        				(折價卷 50 元兩張，隨包裹附上<br>
+		        				折價卷數量有限，按照訂購順序發放</p>
+		        			</li>
+		        			<li>Line@ 加好友傳訊息送小額折價券 $10
+		        				<p class="example">新品嘗鮮快人一步，加入好友每日獲得最新優惠</p>
+		        			</li>
+		        			<li>開站慶全館優惠。
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>滿額送折價券
+		        				<p class="example">全館購物滿額 888 送折價券，下次購物滿 99 元可使用</p>
+		        				<p class="example">特定分類商品購物滿額 999 送折價券，下次購買特定分類商品可折扣</p>
+		        			</li>
+		        			<li>使用紅利點數兌換贈品
+		        				<p class="example"></p>
+		        			</li>
+		        			<!-- <li>全館限時優惠
+		        				<p class="example">全館統一降價 79 折</p>
+		        				<p class="example">全館購物滿額 888 就打 8 折起，買越多折扣越多</p>
+		        			</li> -->
+		        			<li>訂單滿額即享 % 折扣或折抵固定金額
+		        				<p class="example">全店單筆消費滿 2000 元，折扣 100 元。</p>
+		        				<p class="example">全館購物滿額 888 就打 8 折起，買越多折扣越多。</p>
+		        			</li>
+		        			<li>指定商品滿額即享 % 折扣或折抵固定金額
+		        				<p class="example">美妝類商品單筆消費滿 2000 元，折扣 100 元。</p>
+		        				<p class="example">蛋糕購物滿額 888 就打 8 折起，買越多折扣越多。</p>
+		        			</li>
+		        			<li>訂單滿件即享 % 折扣或折抵固定金額
+		        				<p class="example">全店單筆消費 3 件商品以上，每件折扣 50 元。</p>	        				
+		        			</li>
+		        			<li>指定商品滿件即享 % 折扣或折抵固定金額
+		        				<p class="example">衣服滿 3 件 8 折</p>	        				
+		        			</li>
+		        			<li>滿額多重折扣
+		        				<p class="example">全店單筆消費滿 1000 元 9 折 ，滿 1500 元 8 折 ，滿 2000 元 7 折</p>	        				
+		        			</li>
+		        			<li>加入會員得小禮物
+		        				<p class="example">即日起加入網站線上 VIP 會員，帳戶內將自動獲得 100 元優惠序號</p>
+		        				<p class="example">加入會員並下單購物，隨包裹將附上 100 元優惠序號。</p>
+		        			</li>
+		        			<li>全館折扣
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>訂購就送小禮物
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>留言就送小禮物
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>分享照片就送小禮物
+		        				<p class="example">分享您的 DIY 作品，可獲得折價券</p>
+		        			</li>
+		        			<li>投票比賽<p class="example"></p></li>
+		        			<li>投稿比賽<p class="example">在活動文章留言商品使用心得與照片，將隨機抽出 10 名贈送小禮物</p></li>
+		        			<li>固定金額任選<p class="example">99 元任選 5 件</p></li>
+		        			<li>洩密<p class="example"></p></li>
+		        			<li>猜優惠<p class="example"></p></li>
+		        			<li>每日固定時間優惠
+		        				<p class="example">每日 10:00 上新品</p>
+		        				<p class="example">每日 12:00 限量三組超特價品，售完為止</p>
+		        			</li>
+		        			<li>臉書直播投票
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>臉書直播送優惠代碼
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>黑色星期五優惠
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>100000 現金補貼瘋搶
+		        				<p class="example">購物折扣金額，從 100000 扣除</p>
+		        			</li>
+		        			<li>限時免運
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>滿額免運門檻金額降低
+		        				<p class="example"></p>
+		        			</li>
+		        			<li>特定商品免運
+		        				<p class="example">購買 2 入組合免運費</p>
+		        			</li>
+		        		</ol>
+		        	</div>     	        	
+		        </div>  	
+	        </div>
+
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="about_modal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">簡介與感謝名單</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<h4>這個工具是用來解決</h4>
+		        <p>減少想活動的時間。</p>		      
+				<h4>協力工具</h4>
+				<ul>
+					<li><a href="https://vuejs.org/v2/guide/#Composing-with-Components" target="_blank">Vue.js</a> 終於脫離 keypress 事件與 DOM 操作地獄</li>
+					<li><a href="https://tw.piliapp.com/facebook-symbols/" target="_blank">工具邦 piliapp</a> 引用並修改他的 sprite images 與 css 片段，讓這網頁能顯示 Facebook 的表情符號。</li>
+					<li><a href="http://fezvrasta.github.io/bootstrap-material-design/</li>" target="_blank">Material Design for Bootstrap</a> 基本介面樣式設定
+				</ul>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">好的</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+        <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/material.js"></script>
+	    <script src="js/ripples.min.js"></script>        
+        <script src="js/moment.min.js"></script>     
+        <script src="js/moment-transform.min.js"></script>
+       
+        <script>
+        	var random = Math.floor(Math.random()*10+1);
+    		function event_refresh(){
+    			var newrandom = Math.floor(Math.random()*10+1);  
+    				if ($('.animated').is(":checked")) {
+    					$(".event_list>li").hide();
+    					$(".event_list>li").eq(random*2).fadeTo('slow', 0.5).fadeOut();	
+    					$(".event_list>li").eq(random*3).fadeTo('slow', 0.5).fadeOut();	
+    					$(".event_list>li").eq(random*4).fadeTo('slow', 0.5).fadeOut();	
+    					$(".event_list>li").eq(random*5).fadeTo('slow', 0.5).fadeOut();	
+    					$(".event_list>li").eq(random*6).fadeTo('slow', 0.5).fadeOut();	
+    					$(".event_list>li").eq(random*7).fadeTo('slow', 0.5).fadeOut();	     					 					    					
+    					$(".event_list>li").eq(newrandom).hide(0).delay(500).show(0).addClass('show');						
+    				}
+    				else{
+    					$(".event_list>li").hide();
+    					$(".event_list>li").eq(newrandom).fadeIn();							
+    				}
+    		}
+
+    		function ta_refresh(){
+    			var newrandom = Math.floor(Math.random()*10+1);
+    				if ($('.animated').is(":checked")) {
+    					$(".ta_type>li").hide();
+    					$(".ta_type>li").eq(random*2).fadeTo('slow', 0.5).fadeOut();	
+    					$(".ta_type>li").eq(random*4).fadeTo('slow', 0.5).fadeOut();	
+    					$(".ta_type>li").eq(random*6).fadeTo('slow', 0.5).fadeOut();	
+    					$(".ta_type>li").eq(random*7).fadeTo('slow', 0.5).fadeOut();	
+    					$(".ta_type>li").eq(random*9).fadeTo('slow', 0.5).fadeOut();	
+    					$(".ta_type>li").eq(random*10).fadeTo('slow', 0.5).fadeOut();    					
+    					$(".ta_type>li").eq(newrandom).hide(0).delay(500).show(0)						
+    				}
+    				else{
+    					$(".ta_type>li").hide();
+						$(".ta_type>li").eq(newrandom).fadeIn();	
+    				}
+    		}
+  
+			$(function () {
+    			$.material.init();
+    			var thismonth = moment().format('MMM').toLowerCase();
+    			var nextmonth_int = parseInt(moment().format('M')) + 1;
+    			var nextmonth = moment(nextmonth_int, "M").format("MMM").toLowerCase();
+    			//console.log(thismonth, nextmonth, nextmonth_int);
+    			$('.recentevent').children().each(function(index, el) {
+    				if($(this).hasClass(thismonth) || $(this).hasClass(nextmonth)) $(this).fadeIn()
+    			});    		
+
+    			$('.demodate_tomorrow').text(moment().add(1, 'days').format("YYYY/MM/DD"));
+    			$('.demodate_next_month_end').text(moment().add(1, 'months').endOf('month').format("YYYY/MM/DD"));
+    			
+    			event_refresh();
+    			ta_refresh();
+    		});
+
+    		// $('.post_txt_edit').keyup(function() {
+    		// 	console.log($(this).val())
+    		// });
+
+    		// $('.emoji').click(function() {
+    		// 	var cssclass = $(this).prop('class');
+    		// 	var emoj = $(this).data('c');
+    		// 	$('.post_txt_edit').append("<img class='"+ cssclass +"' data-c='"+ emoj +"'>");
+    		// });
+        </script>
+       
+    </body>
+</html>
