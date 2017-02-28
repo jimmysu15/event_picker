@@ -13,39 +13,171 @@
   		<link rel="stylesheet" href="css/ripples.min.css">        
   		<style>
   			body{
-				background: url('images/the-adoption-of-1515293_1920.jpg') no-repeat top center;
+				background:#080705 url('images/presents-1913987_1920.jpg') no-repeat top center;
 				font-size: 15px;
 				font-family: microsoft jhenghei, sans-serif
 			}
-			body::after{content:'';background: rgba(255,255,255,.8);position: absolute;width:100%;height:100vh;top:0;left:0;display: block;z-index: 0}
 			.btn.btn-sm, .input-group-btn .btn.btn-sm, .btn-group-sm .btn, .btn-group-sm .input-group-btn .btn{padding: 5px 10px;}
 			.form-group{margin-top: 0}
 			.input-group-addon {font-size: 15px;}
 
 			.navbar.main_nav_wrap{margin-bottom: 5px;position: relative;z-index: 1;background: none;color:#FF5722;font-weight: bold}
-			.navbar>.container .navbar-brand{font-size: 30px;height: auto;line-height: 100%;padding-top: 25px}
+			.navbar>.container .navbar-brand{font-size: 20px;height: auto;line-height: 100%;padding-top: 30px;color:#fff;}
+			.navbar .navbar-nav > li > a{padding-top:30px;padding-bottom: 20px;font-size: 20px;color: #fff}
+
 			.navbar .navbar-nav > li > .togglebutton{padding-top:25px;padding-bottom: 20px;font-size: 20px;}
-			.navbar .togglebutton label{color:#FF5722;}
+			.togglebutton label input[type=checkbox]:checked + .toggle{background-color: rgba(22, 83, 255, 0.5);}
+			.togglebutton label input[type=checkbox]:checked + .toggle:after{background-color: #3f51b5;}
+			.navbar .togglebutton label{color:#3f51b5;}
 			.navbar .toggle{margin-left: 15px}
-			/* .togglebutton label input[type=checkbox]:checked + .toggle{background: rgba(255, 226, 20, 0.5)} */
-
-
+						
 			.page_wrapper{background: rgba(255,255,255,.9);padding-top: 20px;border-radius: 5px;position: relative;z-index: 1}
 			.filter_wrap{margin-bottom: 20px;border-bottom: 1px dotted #555;padding-bottom: 20px}
 			.filter_wrap:last-child{border-bottom: 0}
 			.func_title{margin:5px 0 0;font-size: 16px}
 
 			.recentevent{padding:0;margin:0;list-style: none}
-			.recentevent>li{display: none;border:1px solid #ccc;background: #fff;border-radius: 5px;margin:0 10px 10px 0;padding:2px 5px;float: left;font-size: 34px;}
+			.recentevent>li{display: none;border:1px solid #ccc;border-radius: 5px;margin:0 10px 10px 0;padding:2px 5px;float: left;font-size: 34px;}
+			.recentevent>li:hover{background: #fff;box-shadow: 0 0 10px #fff}
+			.ta_type>li, .event_list>li{font-size: 34px;color:#000;}  			
+
+			.filter_ta{height:100px;overflow: hidden;}
 			.ta_type, .event_list{list-style: none;padding:0;margin:0;letter-spacing: 1px}
-			.ta_type{height:48px;overflow: hidden}
-			.ta_type>li, .event_list>li{display: none;font-size: 34px;color:#000;}
-  			.ta_type>li{float: left;margin-right: 10px}
-  			.event_list>li{position: absolute;}
-  			.event_list>.show{position: relative}
+			.ta_type{position: relative;}
+			.ta_type>li{height:100px;}
+			
+  			.filter_event{height:200px;overflow: hidden}
+  			.event_list{position: relative;}
+  			.event_list>li{height:200px;}
   			.event_list>li>.example{font-size:16px;color:#000;margin-top: 5px}
 
   			.btn_re_event>.glyphicon, .btn_re_ta>.glyphicon{margin-right: 10px}
+
+  			/* Overlay style */
+			.overlay {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: rgba(153,204,51,0.9);
+				z-index: 2;
+			}
+
+			/* Overlay closing cross */
+			.overlay .overlay-close {
+				width: 80px;
+				height: 80px;
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				overflow: hidden;
+				border: none;
+				/* text-indent: 200%;
+				color: transparent; */
+				font-size: 40px;
+				color: #fff;
+				background: none;
+				outline: none;
+				z-index: 100;
+			}
+
+			/* Menu style */
+			.overlay nav {
+				text-align: center;
+				position: relative;
+				top: 50%;
+				height: 60%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+
+			.overlay ul {
+				list-style: none;
+				padding: 0;
+				margin: 0 auto;
+				display: inline-block;
+				height: 100%;
+				position: relative;
+			}
+
+			.overlay ul li {
+				display: block;
+				height: 20%;
+				height: calc(100% / 5);
+				min-height: 54px;
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+			}
+
+			.overlay ul li a {
+				font-size: 54px;
+				font-weight: 300;
+				display: block;
+				color: #fff;
+				-webkit-transition: color 0.2s;
+				transition: color 0.2s;
+			}
+
+			.overlay ul li a:hover,
+			.overlay ul li a:focus {
+				color: #f0f0f0;
+			}
+
+			/* Effects */
+			.overlay-boxes {
+				background: transparent;
+				visibility: hidden;
+				-webkit-transition: visibility 0s 0.8s;
+				transition: visibility 0s 0.8s;
+			}
+
+			.overlay-boxes.open {
+				visibility: visible;
+				-webkit-transition: none;
+				transition: none;
+			}
+
+			.overlay-boxes svg {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			.overlay-boxes svg path {
+				fill: rgb(153,204,51);
+				display: none;
+			}
+
+			.overlay-boxes nav,
+			.overlay-boxes .overlay-close {
+				opacity: 0;
+				-webkit-transition: opacity 0.5s 0.8s;
+				transition: opacity 0.5s 0.8s;
+			}
+
+			.overlay-boxes.open nav,
+			.overlay-boxes.open .overlay-close {
+				opacity: 1;
+				-webkit-transition-delay: 0.8s;
+				transition-delay: 0.8s;
+			}
+
+			.overlay-boxes.close nav,
+			.overlay-boxes.close .overlay-close {
+				-webkit-transition-delay: 0s;
+				transition-delay: 0s;
+			}
+
+			@media screen and (max-height: 30.5em) {
+				.overlay nav {
+					height: 70%;
+					font-size: 34px;
+				}
+				.overlay ul li {
+					min-height: 34px;
+				}
+			}
 
   		</style>
         
@@ -67,18 +199,16 @@
 		      <a class="navbar-brand" href="#">給我一個優惠方案</a>
 		    </div>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse">
 		      <ul class="nav navbar-nav">
-		      			       
+		      	<li><a href="#" id="open-comment-overlay"><span class="glyphicon glyphicon-comment"></span> 留言</a></li>		       
 		      </ul>
-		      <ul class="nav navbar-nav navbar-right">
-		      	<!-- <li><a href="#" data-toggle="modal" data-target="#about_modal"><span class="glyphicon glyphicon-glass"></span> 簡介與感謝名單</a></li> -->
+		      <ul class="nav navbar-nav navbar-right">		      	
 		      	<li>
 		      		<div class="togglebutton">
 		              <label>
-		                動畫效果
-		                <input type="checkbox" class="animated">
+		                拉霸機效果
+		                <input type="checkbox" class="animated" checked="">
 		              </label>
 		            </div>
 		      	</li>
@@ -87,28 +217,6 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 			
-    	<!-- <div class="container">
-	    	<div class="row">
-	    		<div class="col-sm-4">
-	    			<div class="form-group">
-		    			<label class="control-label" for="pd_price">商品單價原價</label>
-		    			<input type="text" class="form-control" id="pd_price">
-		    		</div>
-	    		</div>
-	    		<div class="col-sm-4">
-	    			<div class="form-group">
-		    			<label class="control-label" for="freight_fee">運費</label>
-		    			<input type="text" class="form-control" id="freight_fee">
-		    		</div>
-	    		</div>
-	    		<div class="col-sm-4">
-	    			<div class="form-group">
-		    			<label class="control-label" for="member_level">有會員等級</label>
-		    			<input type="checkbox" id="member_level">
-		    		</div>	
-	    		</div>
-	    	</div>    		
-    	</div>  -->
     	<div class="container page_wrapper">
     		    	
 	    	<div class=" filter_wrap filter_date">
@@ -119,6 +227,7 @@
 	    			<div class="col-sm-11">
 			    			<ul class="recentevent">
 			    				<li class="dec jan feb">新年優惠</li>
+			    				<li class="dec jan feb april may aug sep oct">連假收假</li>
 			    				<li class="jan">農曆年預購</li>
 			    				<li class="feb">開工優惠</li>
 			    				<li class="jan">春節</li>
@@ -175,8 +284,7 @@
 	    				<a class="btn btn-warning btn-raised btn-sm btn_re_ta" onclick="ta_refresh()"><span class="glyphicon glyphicon-refresh"></span>換一個</a>
 	    			</div>
 	    			<div class="col-sm-11">
-			    			<ul class="ta_type">
-			    				<li></li>
+			    			<ul class="ta_type">			    				
 			    				<li>喜歡自己下廚的人</li>
 			    				<li>單親媽媽</li>
 			    				<li>碩博士</li>
@@ -185,19 +293,22 @@
 			    				<li>文青</li>
 			    				<li>司機/運將</li>
 			    				<li>愛吃海鮮的人</li>
-			    				<li>長頭髮的人</li>
+			    				<li>科技愛好者</li>
 			    				<li>敏感肌膚的人</li>
 			    				<li>放寒暑假的學生</li>
 			    				<li>上班族</li>
 			    				<li>品酒者</li>
 			    				<li>喜歡電競</li>
-			    				<li>喜歡動漫</li>
+			    				<li>喜歡看電影</li>
+			    				<li>喜歡看漫畫</li>
+			    				<li>喜歡攝影</li>
+			    				<li>喜歡作畫</li>
 			    				<li>日本文化愛好者</li>
 			    				<li>素食者</li>
 			    				<li>青春期小孩</li>
 			    				<li>小Baby</li>
 			    				<li>學齡前小孩</li>
-			    				<li>喜歡撿便宜</li>
+			    				<li>喜歡撿便宜的人</li>
 			    				<li>約聘</li>
 			    				<li>打工人員</li>
 			    				<li>孕婦</li>
@@ -241,8 +352,7 @@
 	    				<a class="btn btn-warning btn-raised btn-sm btn_re_event" onclick="event_refresh()"><span class="glyphicon glyphicon-refresh"></span>換一個</a>
 	    			</div>     	
 		        	<div class="col-sm-8">
-		        		<ol class="event_list">
-		        			<li></li>
+		        		<ol class="event_list">		        			
 		        			<li>加量優惠
 		        				<p class="example">買大送小</p>
 		        				<p class="example">買小盒自動升級大盒<br>買小盒加價升級大盒</p>
@@ -380,48 +490,80 @@
 
         </div>
 
+        <div class="overlay overlay-boxes">
+			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="101%" viewBox="0 0 1440 806" preserveAspectRatio="none">
+				<path d="m0.005959,200.364029l207.551124,0l0,204.342453l-207.551124,0l0,-204.342453z"/>
+				<path d="m0.005959,400.45401l207.551124,0l0,204.342499l-207.551124,0l0,-204.342499z"/>
+				<path d="m0.005959,600.544067l207.551124,0l0,204.342468l-207.551124,0l0,-204.342468z"/>
+				<path d="m205.752151,-0.36l207.551163,0l0,204.342437l-207.551163,0l0,-204.342437z"/>
+				<path d="m204.744629,200.364029l207.551147,0l0,204.342453l-207.551147,0l0,-204.342453z"/>
+				<path d="m204.744629,400.45401l207.551147,0l0,204.342499l-207.551147,0l0,-204.342499z"/>
+				<path d="m204.744629,600.544067l207.551147,0l0,204.342468l-207.551147,0l0,-204.342468z"/>
+				<path d="m410.416046,-0.36l207.551117,0l0,204.342437l-207.551117,0l0,-204.342437z"/>
+				<path d="m410.416046,200.364029l207.551117,0l0,204.342453l-207.551117,0l0,-204.342453z"/>
+				<path d="m410.416046,400.45401l207.551117,0l0,204.342499l-207.551117,0l0,-204.342499z"/>
+				<path d="m410.416046,600.544067l207.551117,0l0,204.342468l-207.551117,0l0,-204.342468z"/>
+				<path d="m616.087402,-0.36l207.551086,0l0,204.342437l-207.551086,0l0,-204.342437z"/>
+				<path d="m616.087402,200.364029l207.551086,0l0,204.342453l-207.551086,0l0,-204.342453z"/>
+				<path d="m616.087402,400.45401l207.551086,0l0,204.342499l-207.551086,0l0,-204.342499z"/>
+				<path d="m616.087402,600.544067l207.551086,0l0,204.342468l-207.551086,0l0,-204.342468z"/>
+				<path d="m821.748718,-0.36l207.550964,0l0,204.342437l-207.550964,0l0,-204.342437z"/>
+				<path d="m821.748718,200.364029l207.550964,0l0,204.342453l-207.550964,0l0,-204.342453z"/>
+				<path d="m821.748718,400.45401l207.550964,0l0,204.342499l-207.550964,0l0,-204.342499z"/>
+				<path d="m821.748718,600.544067l207.550964,0l0,204.342468l-207.550964,0l0,-204.342468z"/>
+				<path d="m1027.203979,-0.36l207.550903,0l0,204.342437l-207.550903,0l0,-204.342437z"/>
+				<path d="m1027.203979,200.364029l207.550903,0l0,204.342453l-207.550903,0l0,-204.342453z"/>
+				<path d="m1027.203979,400.45401l207.550903,0l0,204.342499l-207.550903,0l0,-204.342499z"/>
+				<path d="m1027.203979,600.544067l207.550903,0l0,204.342468l-207.550903,0l0,-204.342468z"/>
+				<path d="m1232.659302,-0.36l207.551147,0l0,204.342437l-207.551147,0l0,-204.342437z"/>
+				<path d="m1232.659302,200.364029l207.551147,0l0,204.342453l-207.551147,0l0,-204.342453z"/>
+				<path d="m1232.659302,400.45401l207.551147,0l0,204.342499l-207.551147,0l0,-204.342499z"/>
+				<path d="m1232.659302,600.544067l207.551147,0l0,204.342468l-207.551147,0l0,-204.342468z"/>
+				<path d="m-0.791443,-0.360001l207.551163,0l0,204.342438l-207.551163,0l0,-204.342438z"/>
+			</svg>
+			<button type="button" class="overlay-close"><span class="glyphicon-remove glyphicon"></button>
+			<div class="fb-comments" data-href="https://jimmysu15.github.io/event_picker/" data-width="500" data-numposts="20"></div>
+		</div>
+
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>        
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="js/material.js"></script>
 	    <script src="js/ripples.min.js"></script>        
         <script src="js/moment.min.js"></script>     
         <script src="js/moment-transform.min.js"></script>
+        <script src="js/classie.js"></script>
+        <script src="js/snap.svg-min.js"></script>
+
+        <div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.8&appId=704904292996403";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
        
         <script>
-        	var random = Math.floor(Math.random()*10+1);
-    		function event_refresh(){
-    			var newrandom = Math.floor(Math.random()*10+1);  
+        	function event_refresh(){
+        		var random = Math.floor(Math.random()*43);
+    			var newrandom = Math.floor(Math.random()*43);  
     				if ($('.animated').is(":checked")) {
-    					$(".event_list>li").hide();
-    					$(".event_list>li").eq(random*2).fadeTo('slow', 0.5).fadeOut();	
-    					$(".event_list>li").eq(random*3).fadeTo('slow', 0.5).fadeOut();	
-    					$(".event_list>li").eq(random*4).fadeTo('slow', 0.5).fadeOut();	
-    					$(".event_list>li").eq(random*5).fadeTo('slow', 0.5).fadeOut();	
-    					$(".event_list>li").eq(random*6).fadeTo('slow', 0.5).fadeOut();	
-    					$(".event_list>li").eq(random*7).fadeTo('slow', 0.5).fadeOut();	     					 					    					
-    					$(".event_list>li").eq(newrandom).hide(0).delay(500).show(0).addClass('show');						
+    					$(".event_list").animate({'top': -(newrandom*200) }, 1000, 'easeOutQuint')
     				}
-    				else{
-    					$(".event_list>li").hide();
-    					$(".event_list>li").eq(newrandom).fadeIn();							
+    				else{    					
+    					$(".event_list").css('top', -(newrandom*200));					
     				}
     		}
 
     		function ta_refresh(){
-    			var newrandom = Math.floor(Math.random()*10+1);
+    			var random = Math.floor(Math.random()*55);
+    			var newrandom = Math.floor(Math.random()*55);
     				if ($('.animated').is(":checked")) {
-    					$(".ta_type>li").hide();
-    					$(".ta_type>li").eq(random*2).fadeTo('slow', 0.5).fadeOut();	
-    					$(".ta_type>li").eq(random*4).fadeTo('slow', 0.5).fadeOut();	
-    					$(".ta_type>li").eq(random*6).fadeTo('slow', 0.5).fadeOut();	
-    					$(".ta_type>li").eq(random*7).fadeTo('slow', 0.5).fadeOut();	
-    					$(".ta_type>li").eq(random*9).fadeTo('slow', 0.5).fadeOut();	
-    					$(".ta_type>li").eq(random*10).fadeTo('slow', 0.5).fadeOut();    					
-    					$(".ta_type>li").eq(newrandom).hide(0).delay(500).show(0)						
+    					$(".ta_type").animate({'top': -(newrandom*100) }, 1000, 'easeOutQuint')
     				}
     				else{
-    					$(".ta_type>li").hide();
-						$(".ta_type>li").eq(newrandom).fadeIn();	
+    					$(".ta_type").css('top', -(newrandom*100));
     				}
     		}
   
@@ -440,17 +582,65 @@
     			
     			event_refresh();
     			ta_refresh();
+
+    			// https://tympanus.net/Development/FullscreenOverlayStyles/index10.html
+				function shuffle(array) {
+					var currentIndex = array.length
+					, temporaryValue
+					, randomIndex
+					;
+
+					// While there remain elements to shuffle...
+					while (0 !== currentIndex) {
+						// Pick a remaining element...
+						randomIndex = Math.floor(Math.random() * currentIndex);
+						currentIndex -= 1;
+						// And swap it with the current element.
+						temporaryValue = array[currentIndex];
+						array[currentIndex] = array[randomIndex];
+						array[randomIndex] = temporaryValue;
+					}
+					return array;
+				}
+
+				var triggerBttn = document.getElementById( 'open-comment-overlay' ),
+					overlay = document.querySelector( 'div.overlay' ),
+					closeBttn = overlay.querySelector( 'button.overlay-close' ),
+					paths = [].slice.call( overlay.querySelectorAll( 'svg > path' ) ),
+					pathsTotal = paths.length;
+
+				function toggleOverlay() {
+					var cnt = 0;
+
+					shuffle( paths );
+
+					if( classie.has( overlay, 'open' ) ) {
+						classie.remove( overlay, 'open' );
+						classie.add( overlay, 'close' );
+						
+						paths.forEach( function( p, i ) {
+							setTimeout( function() {
+								++cnt;
+								p.style.display = 'none';
+								if( cnt === pathsTotal ) {
+									classie.remove( overlay, 'close' );
+								}
+							}, i * 30 );
+						});
+					}
+					else if( !classie.has( overlay, 'close' ) ) {
+						classie.add( overlay, 'open' );
+						paths.forEach( function( p, i ) {
+							setTimeout( function() {
+								p.style.display = 'block';
+							}, i * 30 );
+						});
+					}
+				}
+
+				triggerBttn.addEventListener( 'click', toggleOverlay );
+				closeBttn.addEventListener( 'click', toggleOverlay );
     		});
-
-    		// $('.post_txt_edit').keyup(function() {
-    		// 	console.log($(this).val())
-    		// });
-
-    		// $('.emoji').click(function() {
-    		// 	var cssclass = $(this).prop('class');
-    		// 	var emoj = $(this).data('c');
-    		// 	$('.post_txt_edit').append("<img class='"+ cssclass +"' data-c='"+ emoj +"'>");
-    		// });
         </script>
        
     </body>
